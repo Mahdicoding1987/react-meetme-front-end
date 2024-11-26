@@ -48,6 +48,12 @@ const App = () => {
     navigate("/posts");
   };
 
+  const handleUpdatePost = async (postId, postFormData) => {
+    const updatedPost = await postService.update(postId, postFormData);
+    setPosts(posts.map((post) => (postId === post._id ? updatedPost : post)));
+    navigate(`/posts/${postId}`);
+  };
+
   return (
     <>
       <AuthedUserContext.Provider value={user}>
@@ -60,6 +66,7 @@ const App = () => {
               <Route path="/posts" element={<PostList posts={posts} />} />
               <Route path="/posts/new" element={<PostForm handleAddPost={handleAddPost} />} />
               <Route path="/posts/:postId" element={<PostDetails handleDeletePost={handleDeletePost} />} />
+              <Route path="/posts/:postId/edit" element={<PostForm handleUpdatePost={handleUpdatePost} />} />
             </>
           ) : (
             // Public Route:

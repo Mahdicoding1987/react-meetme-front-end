@@ -3,6 +3,7 @@ import { useState, useEffect, useContext } from "react";
 import * as postService from "../../services/postService";
 import CommentForm from "../CommentForm/CommentForm";
 import { AuthedUserContext } from "../../App";
+import { Link } from "react-router-dom";
 
 const PostDetails = (props) => {
   const { postId } = useParams();
@@ -38,6 +39,7 @@ const PostDetails = (props) => {
         </p>
         {post.author._id === user._id && (
           <>
+            <Link to={`/posts/${postId}/edit`}>Edit</Link>
             <button onClick={() => props.handleDeletePost(postId)}>Delete</button>
           </>
         )}
