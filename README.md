@@ -106,8 +106,8 @@ Display all comments for the posts
 
 ## ERD & Data Entity Fields
 
-<img src="/Planning/meetme ERD.png">
+![alt text](/planning/meetmeERD.png)
 
 ## Wire Frame
 
-<img src="/Planning/meetme mockup.png">
+![alt text](/planning/meetmemockup.png)
