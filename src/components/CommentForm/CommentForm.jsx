@@ -1,11 +1,21 @@
 // src/components/CommentForm/CommentForm.jsx
 
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 import * as postService from "../../services/postService";
 
 const CommentForm = (props) => {
   const [formData, setFormData] = useState({ text: "" });
+  const { postId, commentId } = useParams();
+
+  useEffect(() => {
+    const fetchPost = async () => {
+      const postData = await postService.show(postId);
+      setFormData(postData.comments.find((comment) => comment._id === comment._id));
+    };
+    if (postId && commentId) fetchPost();
+  }, [postId, commentId]);
 
   const handleChange = (evt) => {
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
@@ -13,7 +23,7 @@ const CommentForm = (props) => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    props.handleAddComment(formData);
+    props.handleUpdateComment(formData);
     setFormData({ text: "" });
   };
 

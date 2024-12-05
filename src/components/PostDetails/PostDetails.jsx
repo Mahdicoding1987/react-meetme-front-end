@@ -25,8 +25,22 @@ const PostDetails = (props) => {
     fetchPost();
   }, [postId]);
 
+  const handleDeleteComment = async (commentId) => {
+    await postService.deleteComment(postId, commentId);
+    setPost({
+      ...post,
+      comments: post.comments.filter((comment) => comment._id !== commentId),
+    });
+  };
+
+  if (!post) {
+    return <main>Loading...</main>;
+  }
+
   console.log("post state:", post);
   if (!post) return <main>Loading...</main>;
+
+  ///////////////////////////////////////////////////////////////////////////
 
   return (
     <main>
@@ -60,6 +74,10 @@ const PostDetails = (props) => {
               </p>
             </header>
             <p>{comment.text}</p>
+            <>
+              <Link to={`/posts/${postId}/comments/${comment._id}/edit`}>Edit</Link>
+              <button onClick={() => handleDeleteComment(comment._id)}>Delete</button>
+            </>
           </article>
         ))}
       </section>

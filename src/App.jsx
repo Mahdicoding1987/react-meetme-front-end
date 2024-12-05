@@ -10,12 +10,14 @@ import PostList from "./components/PostList/PostList";
 import * as postService from "./services/postService";
 import PostDetails from "./components/PostDetails/PostDetails";
 import PostForm from "./components/PostForm/PostForm";
+import CommentForm from "./components/CommentForm/CommentForm";
 
 export const AuthedUserContext = createContext(null);
 
 const App = () => {
   const [user, setUser] = useState(authService.getUser()); // using the method from authservice
   const [posts, setPosts] = useState([]);
+  const [comments, setComments] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -50,7 +52,17 @@ const App = () => {
 
   const handleUpdatePost = async (postId, postFormData) => {
     const updatedPost = await postService.update(postId, postFormData);
+
     setPosts(posts.map((post) => (postId === post._id ? updatedPost : post)));
+
+    navigate(`/posts/${postId}`);
+  };
+
+  const handleUpdateComment = async (postId, commentId, commentFormData) => {
+    const updatedComment = await postService.update(commentId, commentFormData);
+
+    setComments(comments.map((comment) => (commentId === comment._id ? updatedComment : comment)));
+
     navigate(`/posts/${postId}`);
   };
 
@@ -67,6 +79,10 @@ const App = () => {
               <Route path="/posts/new" element={<PostForm handleAddPost={handleAddPost} />} />
               <Route path="/posts/:postId" element={<PostDetails handleDeletePost={handleDeletePost} />} />
               <Route path="/posts/:postId/edit" element={<PostForm handleUpdatePost={handleUpdatePost} />} />
+              <Route
+                path="/posts/:postId/comments/:commentId/edit"
+                element={<CommentForm handleUpdateComment={handleUpdateComment} />}
+              />
             </>
           ) : (
             // Public Route:

@@ -83,6 +83,36 @@ const index = async () => {
       console.log(error);
     }
   }
+
+  const deleteComment = async (postId, commentId) => {
+    try {
+      const res = await fetch(`${BASE_URL}/${postId}/comments/${commentId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      })
+      return res.json();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
+  const updateComment = async (postId, commentId, commentFormData) => {
+    try {
+      const res = await fetch(`${BASE_URL}/${postId}/comments/${commentId}`, {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(commentFormData),
+      });
+      return res.json();
+    } catch (error) {
+      console.log(error);
+    }
+  };
   
   export {
     index,
@@ -91,4 +121,6 @@ const index = async () => {
     createComment,
     deletePost,
     update,
+    deleteComment,
+    updateComment
   };

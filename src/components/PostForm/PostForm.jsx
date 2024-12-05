@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import * as postService from "../../services/postService";
+// const { postId, commentId } = useParams();
 
 const PostForm = (props) => {
   const [formData, setFormData] = useState({
