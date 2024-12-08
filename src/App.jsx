@@ -11,6 +11,7 @@ import * as postService from "./services/postService";
 import PostDetails from "./components/PostDetails/PostDetails";
 import PostForm from "./components/PostForm/PostForm";
 import CommentForm from "./components/CommentForm/CommentForm";
+import Profile from "./components/Profile/Profile";
 
 export const AuthedUserContext = createContext(null);
 
@@ -84,6 +85,7 @@ const App = () => {
                 path="/posts/:postId/comments/:commentId/edit"
                 element={<CommentForm handleUpdateComment={handleUpdateComment} />}
               />
+              <Route path="/profile/:userId" element={<Profile />} />
             </>
           ) : (
             // Public Route:

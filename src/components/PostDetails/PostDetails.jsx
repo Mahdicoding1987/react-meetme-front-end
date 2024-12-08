@@ -63,7 +63,8 @@ const PostDetails = (props) => {
           {post.author.username} posted on
           {new Date(post.createdAt).toLocaleDateString()}
         </p> */}
-        <AuthorInfo content={post} />
+        {/* <AuthorInfo content={post} /> */}
+        <Link to={`/profile/${user._id}`}>{user.username}</Link>
         {post.author._id === user._id && (
           <>
             <Link to={`/posts/${postId}/edit`}>
@@ -85,9 +86,11 @@ const PostDetails = (props) => {
         {post.comments.map((comment) => (
           <article key={comment._id}>
             <header>
+              <Link to={`/profile/${user._id}`}>{user.username}</Link>
+
               <AuthorInfo content={comment} />
 
-              {comment.author._id === user._id && (
+              {comment.author._id === user.id && (
                 <>
                   <Link to={`/posts/${postId}/comments/${comment._id}/edit`}>
                     <Icon category="Edit" />

@@ -14,11 +14,12 @@ const PostList = (props) => {
                 <h2>{post.title}</h2>
                 <Icon category={post.category} />
               </div>
-              <p>
+              {/* <p>
                 {post.author.username} posted on
                 {new Date(post.createdAt).toLocaleDateString()}
-              </p>
+              </p> */}
               <AuthorInfo content={post} />
+              <p>{post.category}</p>
             </header>
             <p>{post.text}</p>
           </article>
