@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import * as postService from "../../services/postService";
+import styles from "./PostForm.module.css";
 // const { postId, commentId } = useParams();
 
 const PostForm = (props) => {
@@ -34,7 +35,7 @@ const PostForm = (props) => {
   }, [postId]);
 
   return (
-    <main>
+    <main className={styles.container}>
       <form onSubmit={handleSubmit}>
         <h1>{postId ? "Edit Post" : "New Post"}</h1>
         <label htmlFor="title">Title</label>

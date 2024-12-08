@@ -4,6 +4,10 @@ import * as postService from "../../services/postService";
 import CommentForm from "../CommentForm/CommentForm";
 import { AuthedUserContext } from "../../App";
 import { Link } from "react-router-dom";
+import styles from "./PostDetails.module.css";
+import Loading from "../Loading/Loading";
+import Icon from "../Icon/Icon";
+import AuthorInfo from "../../components/AuthorInfo/AuthorInfo";
 
 const PostDetails = (props) => {
   const { postId } = useParams();
@@ -33,6 +37,14 @@ const PostDetails = (props) => {
     });
   };
 
+  const handleUpdateComment = async (commentFormData) => {
+    const updatedComment = await postService.updateComment(postId, commentId, commentFormData);
+    setPost({
+      ...post,
+      comments: post.comments.map((comment) => (comment._id === commentId ? updatedComment : comment)),
+    });
+  };
+
   if (!post) {
     return <main>Loading...</main>;
   }
@@ -43,18 +55,23 @@ const PostDetails = (props) => {
   ///////////////////////////////////////////////////////////////////////////
 
   return (
-    <main>
+    <main className={styles.container}>
       <header>
         <p>{post.category.toUpperCase()}</p>
         <h1>{post.title}</h1>
-        <p>
+        {/* <p>
           {post.author.username} posted on
           {new Date(post.createdAt).toLocaleDateString()}
-        </p>
+        </p> */}
+        <AuthorInfo content={post} />
         {post.author._id === user._id && (
           <>
-            <Link to={`/posts/${postId}/edit`}>Edit</Link>
-            <button onClick={() => props.handleDeletePost(postId)}>Delete</button>
+            <Link to={`/posts/${postId}/edit`}>
+              <Icon category="Edit" />
+            </Link>
+            <button onClick={() => props.handleDeletePost(postId)}>
+              <Icon category="Trash" />
+            </button>
           </>
         )}
       </header>
@@ -68,16 +85,20 @@ const PostDetails = (props) => {
         {post.comments.map((comment) => (
           <article key={comment._id}>
             <header>
-              <p>
-                {comment.author.username} posted on
-                {new Date(comment.createdAt).toLocaleDateString()}
-              </p>
+              <AuthorInfo content={comment} />
+
+              {comment.author._id === user._id && (
+                <>
+                  <Link to={`/posts/${postId}/comments/${comment._id}/edit`}>
+                    <Icon category="Edit" />
+                  </Link>
+                  <button onClick={() => handleDeleteComment(comment._id)}>
+                    <Icon category="Trash" />
+                  </button>
+                </>
+              )}
             </header>
             <p>{comment.text}</p>
-            <>
-              <Link to={`/posts/${postId}/comments/${comment._id}/edit`}>Edit</Link>
-              <button onClick={() => handleDeleteComment(comment._id)}>Delete</button>
-            </>
           </article>
         ))}
       </section>

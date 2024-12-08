@@ -74,7 +74,8 @@ const App = () => {
           {user ? (
             // Protected Routes:
             <>
-              <Route path="/" element={<Dashboard user={user} />} />
+              <Route path="/" element={<Landing />} />
+              {/* <Route path="/" element={<Dashboard user={user} />} /> */}
               <Route path="/posts" element={<PostList posts={posts} />} />
               <Route path="/posts/new" element={<PostForm handleAddPost={handleAddPost} />} />
               <Route path="/posts/:postId" element={<PostDetails handleDeletePost={handleDeletePost} />} />
