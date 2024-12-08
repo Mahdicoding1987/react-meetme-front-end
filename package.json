@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "multer": "^1.4.5-lts.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.3"
@@ -23,5 +24,10 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "vite": "^5.1.4"
-  }
+  },
+  "description": "• As a user, I want to sign up so that I can create an account and store my posts. • As a user, I want to create a new post with a title. • As a user, I want to view my posts and see their details. • As a user, I want to edit my posts • As a user, I want to delete my post if I no longer need it. • As a user, I want to comment on a post to leave feedback or ask questions. • As a user, I want to delete or update my comment after posting it • As a guest user, I can only view posts but not edit or create any data.",
+  "main": "vite.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
