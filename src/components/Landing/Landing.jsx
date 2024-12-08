@@ -2,7 +2,7 @@
 
 import styles from "./Landing.module.css";
 import Stars from "../../assets/images/stars.svg";
-import Logotype from "../../assets/images/logotype.svg";
+// import Logotype from "../../assets/images/logotype.svg";
 
 const Landing = () => {
   return (
