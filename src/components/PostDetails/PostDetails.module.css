@@ -81,3 +81,43 @@
     font-size: 1.5rem;
   }
 }
+
+.actionIcon {
+  width: 10px;  /* Adjusted size */
+  height: 10px; /* Adjusted size */
+  cursor: pointer;
+}
+
+.iconButton {
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-right: 8px; /* Add some space between the buttons */
+}
+
+.actionButtons {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Add some space between the buttons */
+}
+
+.actionButton {
+  background: none;
+  border: 1px solid #007bff;
+  color: #007bff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  width: 80px; /* Set a fixed width */
+  height: 30px; /* Set a fixed height */
+  text-align: center; /* Center the text */
+}
+
+.actionButton:hover {
+  background: #007bff;
+  color: white;
+}

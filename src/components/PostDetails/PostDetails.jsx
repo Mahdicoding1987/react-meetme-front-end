@@ -90,19 +90,19 @@ const PostDetails = (props) => {
               <Link to={`/profile/${user._id}`}>{user.username}</Link>
 
               <AuthorInfo content={comment} />
-
-              {comment.author._id === user.id && (
-                <>
-                  <Link to={`/posts/${postId}/comments/${comment._id}/edit`}>
-                    <Icon category="Edit" />
-                  </Link>
-                  <button onClick={() => handleDeleteComment(comment._id)}>
-                    <Icon category="Trash" />
-                  </button>
-                </>
-              )}
             </header>
             <p>{comment.text}</p>
+            {comment.author._id === user.id && (
+              <div className={styles.actionButtons}>
+                <Link to={`/posts/${postId}/comments/${comment._id}/edit`} className={styles.iconButton}>
+                  <button className={styles.actionButton}>Edit</button>
+                </Link>
+
+                <button onClick={() => handleDeleteComment(comment._id)} className={styles.actionButton}>
+                  Delete
+                </button>
+              </div>
+            )}
           </article>
         ))}
       </section>

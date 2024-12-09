@@ -5,13 +5,13 @@ import AuthorInfo from "../../components/AuthorInfo/AuthorInfo";
 
 const PostList = (props) => {
   return (
-    <main className={styles.container}>
+    <main className={styles.feedContainer}>
       {props.posts.map((post) => (
         <Link key={post._id} to={`/posts/${post._id}`}>
-          <article>
-            <header>
+          <article className={styles.postCard}>
+            <header className={styles.postHeader}>
               <div>
-                <h2>{post.title}</h2>
+                <h1>{post.title}</h1>
                 <Icon category={post.category} />
               </div>
               {/* <p>

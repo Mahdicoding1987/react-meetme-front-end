@@ -1,93 +1,88 @@
+.feedContainer {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
 
+.postCard {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  padding: 16px;
+  transition: transform 0.2s ease;
+}
 
-.container {
-    gap: 14px;
-    width: 90%;
-    /* display: grid; */
-    padding: 25px;
-    grid-template-columns: repeat(1, 1fr);
-    margin: 0 auto;
-    margin-top: 21px;
-    margin-bottom: 21px;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
-    box-shadow: -1px 5px 19px -5px rgba(0,0,0,0.25);
-    -moz-box-shadow: -1px 5px 19px -5px rgba(0,0,0,0.25);
-    -webkit-box-shadow: -1px 5px 19px -5px rgba(0,0,0,0.25);
-  }
+.postCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
 
-  @media only screen and (min-width: 900px) {
-    .container {
-      grid-template-columns: repeat(2, 1fr);
-    }
+.postHeader {
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.userAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.userName {
+  font-weight: 600;
+  color: #333;
+}
+
+.postTime {
+  color: #666;
+  font-size: 0.9rem;
+  margin-left: auto;
+}
+
+.postContent {
+  margin-bottom: 16px;
+  line-height: 1.5;
+  color: #1a1a1a;
+}
+
+.postImage {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.postActions {
+  display: flex;
+  gap: 16px;
+  padding-top: 12px;
+  border-top: 1px solid #eee;
+}
+
+.actionButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  padding: 6px;
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+}
+
+.actionButton:hover {
+  color: #1a1a1a;
+}
+
+@media (max-width: 768px) {
+  .feedContainer {
+    padding: 12px;
   }
   
-  @media only screen and (min-width: 1200px) {
-    .container {
-      grid-template-columns: repeat(3, 1fr);
-    }
+  .postCard {
+    padding: 12px;
   }
-  
-  @media only screen and (min-width: 1500px) {
-    .container {
-      grid-template-columns: repeat(4, 1fr);
-    }
-  }
-    
-  .container article {
-    width: 100%;
-    /* height: 220px; */
-    padding: 14px 21px;
-    border-radius: 5px;
-    border: 5px solid var(--border);
-    background-color: var(--card-background);
-    box-shadow: -1px 5px 19px -5px rgba(0,0,0,0.25);
-    -moz-box-shadow: -1px 5px 19px -5px rgba(0,0,0,0.25);
-    -webkit-box-shadow: -1px 5px 19px -5px rgba(0,0,0,0.25);
-  }
-  
-  .container article header {
-    margin-bottom: 25px;
-  }
-  
-  .container article h2 {
-    margin: 0;
-    font-size: 20px;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    text-overflow: ellipsis;
-    -webkit-box-orient: vertical;
-  }
-  
-  .container article p {
-    width: 100%;
-    font-size: 14px;
-    font-weight: 400;
-    overflow: hidden;
-    line-height: 1.5rem;
-    display: -webkit-box;
-    text-align: justify;
-    -webkit-line-clamp: 3;
-    word-break: keep-all;
-    text-align-last: left;
-    -webkit-box-orient: vertical;
-  }
-  
-  .container header div:first-child {
-    display: flex;
-    align-items: center;
-    margin: 7px 0px 12px 0px;
-    justify-content: space-between;
-  } 
-  
-  .container header div:first-child img {
-    margin: 0;
-    width: 32px;
-    height: 32px;
-    opacity: .8;
-    padding: 3px;
-    border-radius: 50%;
-    border: 1px solid var(--border);
-  }
+}
