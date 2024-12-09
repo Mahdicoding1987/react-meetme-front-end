@@ -10,9 +10,7 @@ const NavBar = ({ handleSignout }) => {
     <>
       {user ? (
         <nav className={styles.container}>
-          <Link to="/">
-            <img src={Logo} alt="A cute owl" />
-          </Link>
+          <Link to="/">Meet Me</Link>
           <ul>
             <li>Welcome, {user.username}</li>
             <li>
@@ -20,6 +18,9 @@ const NavBar = ({ handleSignout }) => {
             </li>
             <li>
               <Link to="/posts/new">NEW POST</Link>
+            </li>
+            <li>
+              <Link to="/settings">Settings</Link>
             </li>
             <li>
               <Link to="" onClick={handleSignout}>

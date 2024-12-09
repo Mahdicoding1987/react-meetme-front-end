@@ -12,6 +12,7 @@ import PostDetails from "./components/PostDetails/PostDetails";
 import PostForm from "./components/PostForm/PostForm";
 import CommentForm from "./components/CommentForm/CommentForm";
 import Profile from "./components/Profile/Profile";
+import Settings from "./components/Settings/Settings";
 
 export const AuthedUserContext = createContext(null);
 
@@ -79,6 +80,7 @@ const App = () => {
               {/* <Route path="/" element={<Dashboard user={user} />} /> */}
               <Route path="/posts" element={<PostList posts={posts} />} />
               <Route path="/posts/new" element={<PostForm handleAddPost={handleAddPost} />} />
+              <Route path="/settings" element={<Settings />} />
               <Route path="/posts/:postId" element={<PostDetails handleDeletePost={handleDeletePost} />} />
               <Route path="/posts/:postId/edit" element={<PostForm handleUpdatePost={handleUpdatePost} />} />
               <Route

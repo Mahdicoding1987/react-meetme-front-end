@@ -9,8 +9,13 @@ const SignupForm = (props) => {
   const [message, setMessage] = useState([""]);
   const [formData, setFormData] = useState({
     username: "",
-    password: "",
+    password: "", // We use password here, it gets hashed on backend
     passwordConf: "",
+    age: "",
+    gender: "",
+    location: "",
+    bio: "",
+    avatar: "https://i.pinimg.com/736x/7f/3b/b8/7f3bb8ca1c26444e3f87281bee19b42f.jpg",
   });
 
   const updateMessage = (msg) => {
@@ -35,30 +40,84 @@ const SignupForm = (props) => {
   const { username, password, passwordConf } = formData;
 
   const isFormInvalid = () => {
-    return !(username && password && password === passwordConf);
+    return !(
+      (formData.username && formData.password && formData.password === formData.passwordConf && formData.gender) // Only required fields need checking
+    );
   };
 
   return (
     <main className={styles.container}>
       <section>
-        <img src={SignupIcon} alt="An owl sitting on a sign" />
-      </section>
-      <section>
         <form onSubmit={handleSubmit}>
           <h1>Sign Up</h1>
           <p>{message}</p>
+
           <div>
             <label htmlFor="username">Username:</label>
-            <input type="text" id="name" value={username} name="username" onChange={handleChange} />
+            <input
+              type="text"
+              id="username"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+              required
+            />
           </div>
+
           <div>
             <label htmlFor="password">Password:</label>
-            <input type="password" id="password" value={password} name="password" onChange={handleChange} />
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
           </div>
+
           <div>
             <label htmlFor="confirm">Confirm Password:</label>
-            <input type="password" id="confirm" value={passwordConf} name="passwordConf" onChange={handleChange} />
+            <input
+              type="password"
+              id="confirm"
+              name="passwordConf"
+              value={formData.passwordConf}
+              onChange={handleChange}
+              required
+            />
           </div>
+
+          <div>
+            <label htmlFor="age">Age:</label>
+            <input type="number" id="age" name="age" value={formData.age} onChange={handleChange} />
+          </div>
+
+          <div>
+            <label htmlFor="gender">Gender:</label>
+            <select id="gender" name="gender" value={formData.gender} onChange={handleChange} required>
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="prefer not to say">Prefer not to say</option>
+            </select>
+          </div>
+
+          <div>
+            <label htmlFor="location">Location:</label>
+            <input type="text" id="location" name="location" value={formData.location} onChange={handleChange} />
+          </div>
+
+          <div>
+            <label htmlFor="bio">Bio:</label>
+            <textarea id="bio" name="bio" value={formData.bio} onChange={handleChange} />
+          </div>
+
+          <div>
+            <label htmlFor="avatar">Avatar URL:</label>
+            <input type="url" id="avatar" name="avatar" value={formData.avatar} onChange={handleChange} />
+          </div>
+
           <div>
             <button disabled={isFormInvalid()}>Sign Up</button>
             <Link to="/">
