@@ -8,12 +8,15 @@ import styles from "./PostDetails.module.css";
 import Loading from "../Loading/Loading";
 import Icon from "../Icon/Icon";
 import AuthorInfo from "../../components/AuthorInfo/AuthorInfo";
+import { useNavigate } from "react-router-dom";
 
 const PostDetails = (props) => {
   const { postId } = useParams();
   const [post, setPost] = useState(null);
   const user = useContext(AuthedUserContext);
   console.log("postId", postId);
+
+  const navigate = useNavigate();
 
   const handleAddComment = async (commentFormData) => {
     const newComment = await postService.createComment(postId, commentFormData);
@@ -65,20 +68,21 @@ const PostDetails = (props) => {
         </p> */}
         {/* <AuthorInfo content={post} /> */}
         <Link to={`/profile/${user._id}`}>Posted By: {user.username}</Link>
-        {post.author._id === user._id && (
-          <>
-            <Link to={`/posts/${postId}/edit`}>
-              <Icon category="Edit" />
-            </Link>
-            <button onClick={() => props.handleDeletePost(postId)}>
-              <Icon category="Trash" />
-            </button>
-          </>
-        )}
       </header>
       <p className={styles.postContent}>{post.text}</p>
-      {post.imageUrl && <img src={post.imageUrl} alt={post.title} style={{ maxWidth: "100%" }} />}{" "}
-      <section>
+      {post.imageUrl && <img src={post.imageUrl} style={{ maxWidth: "100%" }} />}{" "}
+      {post.author._id === user._id && (
+        <>
+          <button onClick={() => navigate(`/posts/${postId}/edit`)} className={styles.actionButton}>
+            Edit
+          </button>
+
+          <button onClick={() => props.handleDeletePost(postId)} className={styles.actionButton}>
+            Delete
+          </button>
+        </>
+      )}
+      <section className={styles.comments}>
         <h2>Comments</h2>
         <CommentForm handleAddComment={handleAddComment} />
 

@@ -12,7 +12,6 @@ const PostList = (props) => {
             <header className={styles.postHeader}>
               <div>
                 <h1>{post.title}</h1>
-                <Icon category={post.category} />
               </div>
               {/* <p>
                 {post.author.username} posted on

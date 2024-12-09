@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import styles from "./Profile.module.css";
+import AuthorInfo from "../../components/AuthorInfo/AuthorInfo";
 
 function Profile() {
   const [profile, setProfile] = useState(null);
@@ -61,9 +62,19 @@ function Profile() {
         console.error("Error:", error);
       }
     };
+
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch("/api/posts"); // adjust URL as needed
+        const data = await response.json();
+        console.log("Fetched posts:", data);
+        setPosts(data);
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
+    };
     fetchProfileAndPosts();
   }, [userId]);
-
   return (
     <div className={styles.pageContainer}>
       {profile ? (
@@ -81,7 +92,7 @@ function Profile() {
               />
               <div className={styles.userInfo}>
                 <p>
-                  <strong>Gender:</strong> {profile.age || "Not specified"}
+                  <strong>Gender:</strong> {profile.gender || "Not specified"}
                 </p>
                 <p>
                   <strong>Age:</strong> {profile.age || "Not specified"}
@@ -97,13 +108,29 @@ function Profile() {
           </div>
           <div className={styles.mainContent}>
             <h2>{profile.username}'s Posts</h2>
-            {posts.map((post) => (
-              <Link to={`/posts/${post._id}`} key={post._id}>
-                <h3>{post.title}</h3>
-                <p>{post.category}</p>
-                <p>{post.text}</p>
-              </Link>
-            ))}
+
+            {posts && posts.length > 0 ? (
+              posts.map((post) => (
+                <Link key={post._id} to={`/posts/${post._id}`}>
+                  <article className={styles.postCard}>
+                    <header className={styles.postHeader}>
+                      <div>
+                        <h1>{post.title}</h1>
+                      </div>
+                      {/* <p>
+                      {post.author.username} posted on
+                      {new Date(post.createdAt).toLocaleDateString()}
+                    </p> */}
+                      <AuthorInfo content={post} />
+                      <p>{post.category}</p>
+                    </header>
+                    <p>{post.text}</p>
+                  </article>
+                </Link>
+              ))
+            ) : (
+              <p>No posts found</p>
+            )}
           </div>
         </>
       ) : (
