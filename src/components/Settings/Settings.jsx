@@ -1,28 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { getUser } from "../../services/authService";
 import styles from "./Settings.module.css";
 
 function Settings() {
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
+  const user = getUser();
+  const initialFormData = {
+    username: user?.username || "",
     password: "",
     newPassword: "",
-    bio: "",
+    bio: user?.bio || "",
     avatar: "",
-  });
+  };
 
-  useEffect(() => {
-    const user = getUser();
-    if (user) {
-      setFormData((prevState) => ({
-        ...prevState,
-        username: user.username || "",
-        email: user.email || "",
-        bio: user.bio || "",
-      }));
-    }
-  }, []);
+  const [formData, setFormData] = useState(initialFormData);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,8 +25,22 @@ function Settings() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Add your API call here to update user settings
-      console.log("Form submitted:", formData);
+      const response = await fetch(`${BASE_URL}/profile/${user._id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify(updatedUser),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log("User settings updated:", data);
+        console.log("Submitting update:", updatedUser);
+        // Optionally, you can update the user state or navigate to another page
+      } else {
+        console.error("Failed to update user settings:", response.statusText);
+      }
     } catch (error) {
       console.error("Error updating settings:", error);
     }
@@ -72,22 +76,13 @@ function Settings() {
         </div>
 
         <div className={styles.formGroup}>
-          <label htmlFor="currentPassword">Current Password</label>
-          <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} />
+          <label htmlFor="avatar">Avatar URL</label>
+          <input type="text" id="avatar" name="avatar" value={formData.avatar} onChange={handleChange} />
         </div>
 
-        <div className={styles.formGroup}>
-          <label htmlFor="newPassword">New Password</label>
-          <input
-            type="password"
-            id="newPassword"
-            name="newPassword"
-            value={formData.newPassword}
-            onChange={handleChange}
-          />
-        </div>
-
-        <button className={styles.submitButton}>Save Changes</button>
+        <button type="submit" className={styles.submitButton}>
+          Save Changes
+        </button>
       </form>
     </div>
   );

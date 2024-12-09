@@ -8,6 +8,7 @@ const PostForm = (props) => {
   const [formData, setFormData] = useState({
     title: "",
     text: "",
+    imageUrl: "",
     category: "Dating",
   });
 
@@ -42,6 +43,17 @@ const PostForm = (props) => {
         <input required type="text" name="title" id="title" value={formData.title} onChange={handleChange} />
         <label htmlFor="text">Text</label>
         <textarea required type="text" name="text" id="text" value={formData.text} onChange={handleChange} />
+        <div className="form-group">
+          <label htmlFor="imageUrl">Image URL:</label>
+          <input
+            type="url"
+            name="imageUrl"
+            value={formData.imageUrl}
+            onChange={handleChange}
+            placeholder="Enter image URL"
+            className="form-control"
+          />
+        </div>
         <label htmlFor="category">Category</label>
         <select required name="category" id="category" value={formData.category} onChange={handleChange}>
           <option value="Dating">Dating</option>

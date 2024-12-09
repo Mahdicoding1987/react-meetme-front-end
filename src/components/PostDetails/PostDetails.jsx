@@ -55,16 +55,16 @@ const PostDetails = (props) => {
   ///////////////////////////////////////////////////////////////////////////
 
   return (
-    <main className={styles.container}>
+    <main className={styles.postDetailsContainer}>
       <header>
         <p>{post.category.toUpperCase()}</p>
-        <h1>{post.title}</h1>
+        <h1 className={styles.postTitle}>{post.title}</h1>
         {/* <p>
           {post.author.username} posted on
           {new Date(post.createdAt).toLocaleDateString()}
         </p> */}
         {/* <AuthorInfo content={post} /> */}
-        <Link to={`/profile/${user._id}`}>{user.username}</Link>
+        <Link to={`/profile/${user._id}`}>Posted By: {user.username}</Link>
         {post.author._id === user._id && (
           <>
             <Link to={`/posts/${postId}/edit`}>
@@ -76,7 +76,8 @@ const PostDetails = (props) => {
           </>
         )}
       </header>
-      <p>{post.text}</p>
+      <p className={styles.postContent}>{post.text}</p>
+      {post.imageUrl && <img src={post.imageUrl} alt={post.title} style={{ maxWidth: "100%" }} />}{" "}
       <section>
         <h2>Comments</h2>
         <CommentForm handleAddComment={handleAddComment} />
