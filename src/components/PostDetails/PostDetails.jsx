@@ -62,15 +62,12 @@ const PostDetails = (props) => {
       <header>
         <p>{post.category.toUpperCase()}</p>
         <h1 className={styles.postTitle}>{post.title}</h1>
-        {/* <p>
-          {post.author.username} posted on
-          {new Date(post.createdAt).toLocaleDateString()}
-        </p> */}
-        {/* <AuthorInfo content={post} /> */}
-        <Link to={`/profile/${user._id}`}>Posted By: {user.username}</Link>
+        <Link to={`/profile/${post.author._id}`}>
+          Posted By: <AuthorInfo content={post} />
+        </Link>
       </header>
       <p className={styles.postContent}>{post.text}</p>
-      {post.imageUrl && <img src={post.imageUrl} style={{ maxWidth: "100%" }} />}{" "}
+      {post.imageUrl && <img src={post.imageUrl} alt={post.title} className="post-image" />}{" "}
       {post.author._id === user._id && (
         <>
           <button onClick={() => navigate(`/posts/${postId}/edit`)} className={styles.actionButton}>
