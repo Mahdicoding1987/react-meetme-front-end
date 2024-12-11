@@ -35,9 +35,6 @@ const SigninForm = (props) => {
 
   return (
     <main className={styles.container}>
-      <section>
-        <img src={LoginIcon} alt="An owl sitting on a sign" />
-      </section>
       <form autoComplete="off" onSubmit={handleSubmit}>
         <h1>Log In</h1>
         <p>{message}</p>
