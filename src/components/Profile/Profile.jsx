@@ -81,7 +81,6 @@ function Profile() {
         <>
           <div className={styles.leftSidebar}>
             <div className={styles.profileInfo}>
-              <h1>{profile.username}'s Profile</h1>
               <img
                 src={profile.avatar || "https://via.placeholder.com/150"}
                 alt={`${profile.username}'s avatar`}
@@ -90,6 +89,7 @@ function Profile() {
                   e.target.src = "https://via.placeholder.com/150";
                 }}
               />
+              <h1>{profile.username}'s Profile</h1>
               <div className={styles.userInfo}>
                 <p>
                   <strong>Gender:</strong> {profile.gender || "Not specified"}

@@ -24,8 +24,9 @@
 .postContent {
   font-size: 1.1rem;
   line-height: 1.6;
-  color: #555;
+  color: black;
   margin-bottom: 2rem;
+  margin-top: 2rem;
 }
 
 .commentsSection {

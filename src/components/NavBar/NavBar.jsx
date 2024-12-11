@@ -22,7 +22,7 @@ const NavBar = ({ handleSignout }) => {
             <li>
               <Link to="/settings">Settings</Link>
             </li>
-            <li>
+            <li className="signOutButton">
               <Link to="" onClick={handleSignout}>
                 Sign Out
               </Link>
