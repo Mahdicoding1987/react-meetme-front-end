@@ -34,8 +34,8 @@ const SigninForm = (props) => {
   };
 
   return (
-    <main class="signin-container">
-      <form class="signin-form" autoComplete="off" onSubmit={handleSubmit}>
+    <main className={styles.container}>
+      <form autoComplete="off" onSubmit={handleSubmit}>
         <h1>Log In</h1>
         <p>{message}</p>
         <div>
