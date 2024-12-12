@@ -11,6 +11,46 @@
 
 ## Pusedo Code
 
+Define the database schema:
+Create a table for users with columns: id, username, password, and email.
+Create a table for posts with columns: id, title, text, user_id, and created_at.
+Create a table for comments with columns: id, text, user_id, post_id, and created_at.
+
+## Database Schema
+
+User Table:
+id: integer, primary key, auto-increment
+username: string, not null
+password: string, not null
+email: string, not null
+
+## Post Table:
+
+id: integer, primary key, auto-increment
+title: string, not null
+text: text, not null
+user_id: integer, foreign key referencing User.id
+created_at: datetime
+
+## Comment Table:
+
+id: integer, primary key, auto-increment
+text: text, not null
+user*id: integer, foreign key referencing User.id
+post_id: integer, foreign key referencing Post.id
+created*
+at: datetime
+
+## Database Setup
+
+Create a new database for the project.
+Create tables for users, posts, and comments.
+Define relationships between tables.
+
+## Get Started
+
+https://react-meetme-front-end.vercel.app
+
 ## LANDING PAGE
 
 Display "Welcome to my website"
@@ -111,3 +151,13 @@ Display all comments for the posts
 ## Wire Frame
 
 ![alt text](/planning/meetmemockup.png)
+
+## Screen Shot
+
+![alt text](/planning/meetmeScreenshot.png)
+
+## Future Features
+
+- Being able to chat with members of the meetme community
+- Being able to create a group chat with members of the meetme community
+- Being able to create a gallery of photos
